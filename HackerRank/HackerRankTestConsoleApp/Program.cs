@@ -10,6 +10,19 @@ namespace HackerRankTestConsoleApp
     {
         static void Main(string[] args)
         {
+
+            Console.WriteLine("1: MaxArraySum\n2:ArrayManipulation");
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    break;
+                case "2":
+                    Array_Manipulation.Test();
+                    break;
+                default:
+                    break;
+            }
+            
         }
     }
 }

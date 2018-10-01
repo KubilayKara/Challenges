@@ -19,12 +19,46 @@ namespace HackerRankTestConsoleApp
             Console.WriteLine("Sample Input 5:" + maxSubsetSum(new int[] { 2,1,8, 10, 8 }));
         }
 
+
+
         // Complete the maxSubsetSum function below.
         static int maxSubsetSum(int[] arr)
         {
             //discard negatives
             //
+            return maxSubsetSum(arr, 0, new Dictionary<int, int>());
+        }
+        private static int maxSubsetSum(int[] arr, int startIndex, Dictionary<int, int> cach)
+        {
+            if (arr.Length <= startIndex)
+            {
+                return 0;
+            }
 
+            if (cach.ContainsKey(startIndex))
+                return cach[startIndex];
+
+            int currentValue = arr[startIndex];
+            //IF Not Selected
+            int sumIFNotSelected = maxSubsetSum(arr, startIndex + 1, cach);
+
+            if (currentValue < 0)
+            {
+                cach[startIndex] = sumIFNotSelected;
+                return sumIFNotSelected;
+            }
+
+            //if select
+            int sumIFSelected = currentValue + maxSubsetSum(arr, startIndex + 2, cach);
+
+            if (sumIFSelected > sumIFNotSelected)
+            {
+                cach[startIndex] = sumIFSelected;
+                return sumIFSelected;
+            }
+
+            cach[startIndex] = sumIFNotSelected;
+            return sumIFNotSelected;
         }
     }
 }
